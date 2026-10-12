@@ -77,4 +77,13 @@ describe("NeuroClashAgent", () => {
 
         expect(decision.tactic).toBe("DEFEND_REPOSITION");
     });
+    it("returns an insufficient-data profile when no events have been recorded", () => {
+        const agent = new NeuroClashAgent();
+
+        const profile = agent.getBehaviorProfile();
+
+        expect(profile.detectedPattern).toBe("INSUFFICIENT_DATA");
+        expect(profile.evidenceCount).toBe(0);
+        expect(profile.confidence).toBe(0);
+    });
 });

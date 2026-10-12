@@ -4,6 +4,7 @@ import { BehaviorProfiler } from "./BehaviorProfiler";
 import { StrategyPlanner } from "./StrategyPlanner";
 import type {
     AgentDecision,
+    BehaviorProfile,
     GameState,
     PlayerEvent,
 } from "./types";
@@ -26,6 +27,11 @@ export class NeuroClashAgent {
         const profile = this.behaviorProfiler.analyze(events);
 
         return this.strategyPlanner.chooseStrategy(state, profile);
+    }
+
+    getBehaviorProfile(): BehaviorProfile {
+        const events = this.eventTracker.getAllEvents();
+        return this.behaviorProfiler.analyze(events);
     }
 
     reset(): void {
